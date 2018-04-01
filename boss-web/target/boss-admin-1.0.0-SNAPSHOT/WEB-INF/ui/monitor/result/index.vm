@@ -1,0 +1,41 @@
+##查询条件
+<div class="row-fluid">
+    <table class="table table-bordered table-striped formLayout m0" style="margin-bottom:0px;">
+        <tr>
+            <td class="textR" style="width:10%">名称:</td>
+            <td style="width:25%">
+                <input type="text" id="s_name" name="s_name" style="width:100%%;" placeholder="请输入名称"/>
+            </td>
+            <td class="textR" style="width:10%">结果:</td>
+            <td style="width:25%">
+                <select id="s_status" name="s_status" style="width:100%%;">
+                    <option value="undefined">--请选择--</option>
+                    <option value="1">成功</option>
+                    <option value="0">失败</option>
+                </select>
+            </td>
+            <td class="textR" style="width:10%">状态:</td>
+            <td style="width:20%">
+                <select id="s_status" name="s_status" style="width:100%%;">
+                    <option value="undefined">--请选择--</option>
+                    #foreach($statusOption in $!{statusOptions})
+                        <option value="$!{statusOption.value}">$!{statusOption.name}</option>
+                    #end
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+#parse("common/index/head.vm")
+
+<th>ID</th>
+<th>应用</th>
+<th>类型</th>
+<th>监控对象</th>
+<th>结果</th>
+<th>创建时间</th>
+#parse("common/index/bottom.vm")
+
+
+##导入js
+<script src="$!{localStaticRes}/js/monitor/result.js?v=$!{v}"></script>

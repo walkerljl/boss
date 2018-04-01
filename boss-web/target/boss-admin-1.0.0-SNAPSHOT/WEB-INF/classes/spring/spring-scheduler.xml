@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <!--定时任务调度器-->
+    <bean id="scheduler.jobExecutionThreadPoolUnit"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+                  value="java.util.concurrent.TimeUnit.SECONDS"/>
+    </bean>
+    <bean id="scheduler.jobExecutionThreadPoolQueue" class="java.util.concurrent.LinkedBlockingQueue">
+        <constructor-arg index="0" value="${scheduler.jobExecutionThreadPoolQueue.capacity:1000}"/>
+    </bean>
+    <bean id="scheduler.jobExecutionThreadPoolNamedThreadFactory"
+          class="org.walkerljl.commons.thread.NamedThreadFactory">
+        <constructor-arg index="0" value="orgwalkerljl-boss-scheduler"/>
+    </bean>
+    <bean id="scheduler.jobExecutionThreadPool" class="java.util.concurrent.ThreadPoolExecutor">
+        <constructor-arg index="0" value="${scheduler.jobExecutionThreadPool.corePoolSize:5}"/>
+        <constructor-arg index="1" value="${scheduler.jobExecutionThreadPool.maximumPoolSize:100}"/>
+        <constructor-arg index="2" value="${scheduler.jobExecutionThreadPool.keepAliveTime:60}"/>
+        <constructor-arg index="3" ref="scheduler.jobExecutionThreadPoolUnit"/>
+        <constructor-arg index="4" ref="scheduler.jobExecutionThreadPoolQueue"/>
+        <constructor-arg index="5" ref="scheduler.jobExecutionThreadPoolNamedThreadFactory"/>
+    </bean>
+    <bean id="scheduler" class="org.walkerljl.commons.schedule.defaults.DefaultScheduler" init-method="start"
+          destroy-method="stop">
+        <constructor-arg name="id" value="orgwalkerljl-boss-scheduler"/>
+        <constructor-arg name="jobExecutionThreadPool" ref="scheduler.jobExecutionThreadPool"/>
+        <property name="jobs">
+            <list>
+                <ref bean="monitorTaskDispatcherJob"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="jobStatus.EXECUTABLE"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+                  value="org.walkerljl.commons.schedule.enums.JobStatus.EXECUTABLE"/>
+    </bean>
+    <bean id="jobStatus.NON_EXECUTABLE"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+                  value="org.walkerljl.commons.schedule.enums.JobStatus.NON_EXECUTABLE"/>
+    </bean>
+
+    <bean id="jobType.SINGLE"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+                  value="org.walkerljl.commons.schedule.enums.JobType.SINGLE"/>
+    </bean>
+    <bean id="jobType.CYCLE"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+                  value="org.walkerljl.commons.schedule.enums.JobType.CYCLE"/>
+    </bean>
+    <bean id="jobType.CRON"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField"
+                  value="org.walkerljl.commons.schedule.enums.JobType.CRON"/>
+    </bean>
+
+    <!--定时任务配置-->
+    <bean id="monitorTaskDispatcherJob" class="org.walkerljl.commons.schedule.JobDetail">
+        <property name="id" value="1"/>
+        <property name="name" value="monitorTaskDispatcherJob"/>
+        <property name="groupId" value="1"/>
+        <property name="job" ref="monitorTaskDispatcher"/>
+        <property name="type" ref="jobType.CYCLE"/>
+        <property name="initialDelay" value="1"/>
+        <property name="fixedDelay" value="60"/>
+        <property name="status" ref="jobStatus.NON_EXECUTABLE"/>
+    </bean>
+</beans>

@@ -1,0 +1,38 @@
+##查询条件
+<div class="row-fluid">
+    <table class="table table-bordered table-striped formLayout m0" style="margin-bottom:0px;">
+        <tr>
+            <td class="textR">用户ID:</td>
+            <td>
+                <input type="text" id="s_userId" name="s_userId" placeholder="请输入用户ID"/>
+            </td>
+            <td class="textR">用户名:</td>
+            <td>
+                <input type="text" id="s_userName" name="s_userName" placeholder="请输入用户名"/>
+            </td>
+            <td class="textR">状态:</td>
+            <td>
+                <select id="s_status" name="s_status" style="width:25%;">
+                    <option value="undefined">--请选择--</option>
+                    #foreach($statusOption in $!{statusOptions})
+                        <option value="$!{statusOption.value}">$!{statusOption.name}</option>
+                    #end
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+#parse("common/index/head.vm")
+
+<th>ID</th>
+<th>用户ID</th>
+<th>用户名</th>
+<th>昵称</th>
+<th>状态</th>
+<th>更新时间</th>
+<th>更新者</th>
+#parse("common/index/bottom.vm")
+
+
+##导入js
+<script src="$!{localStaticRes}/js/sso/user.js?v=$!{v}"></script>

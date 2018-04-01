@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>orgwalkerljl-boss</artifactId>
+        <groupId>org.walkerljl</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>orgwalkerljl-boss-support-common</module>
+        <module>orgwalkerljl-boss-support-domain</module>
+        <module>orgwalkerljl-boss-support-dao</module>
+        <module>orgwalkerljl-boss-support-sdk</module>
+        <module>orgwalkerljl-boss-support-service</module>
+        <module>orgwalkerljl-boss-support-mvc</module>
+        <module>orgwalkerljl-boss-support-openservice</module>
+        <module>orgwalkerljl-boss-support-client</module>
+    </modules>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>orgwalkerljl-boss-support</artifactId>
+
+</project>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.walkerljl.boss.support.dao.daointerface.BaseDAO">
+
+    <!-- 插入字段 -->
+    <sql id="INSERT_COLUMNS">
+        <![CDATA[,remark,status,creator,created_time,modifier,modified_time]]>
+    </sql>
+
+    <!-- 插入字段值 -->
+    <sql id="INSERT_VALUES">
+        <![CDATA[,#{remark},#{status},#{creator},#{createdTime},#{modifier},#{modifiedTime}]]>
+    </sql>
+
+    <!-- 批量插入字段值 -->
+    <sql id="BATCH_INSERT_VALUES">
+        <![CDATA[,#{item.remark},#{item.status},#{item.creator},#{item.createdTime},#{item.modifier},#{item.modifiedTime}]]>
+    </sql>
+
+    <!-- 删除条件 -->
+    <sql id="DELETE_BY_CONDITION_WHERE_CLAUSE">
+        <if test="remark != null"><![CDATA[AND remark = #{remark}]]></if>
+        <if test="status != null"><![CDATA[AND status = #{status}]]></if>
+        <if test="creator != null"><![CDATA[AND creator = #{creator}]]></if>
+        <if test="createdTime != null"><![CDATA[AND created_time = #{createdTime}]]></if>
+        <if test="modifier != null"><![CDATA[AND modifier = #{modifier}]]></if>
+        <if test="modifiedTime != null"><![CDATA[AND modified_time = #{modifiedTime}]]></if>
+    </sql>
+
+    <!-- 更新列字段,字段不为NULL则更新,除开主键 -->
+    <sql id="UPDATE_COLUMN_SET">
+        <if test="remark != null"><![CDATA[a.remark = #{remark},]]></if>
+        <if test="status != null"><![CDATA[a.status = #{status},]]></if>
+        <if test="creator != null"><![CDATA[a.creator = #{creator},]]></if>
+        <if test="createdTime != null"><![CDATA[a.created_time = #{createdTime},]]></if>
+        <if test="modifier != null"><![CDATA[a.modifier = #{modifier},]]></if>
+        <if test="modifiedTime != null"><![CDATA[a.modified_time = #{modifiedTime}]]></if>
+    </sql>
+
+    <!-- 实体对应表中的所有字段 -->
+    <sql id="QUERY_COLUMN_LIST">
+        <![CDATA[,a.remark,a.status,a.creator,a.created_time,a.modifier,a.modified_time]]>
+    </sql>
+
+    <!-- 全部查询条件 -->
+    <sql id="QUERY_WHERE_CLAUSE">
+        <if test="remark != null"><![CDATA[AND a.remark = #{remark}]]></if>
+        <if test="status != null"><![CDATA[AND a.status = #{status}]]></if>
+        <if test="creator != null"><![CDATA[AND a.creator = #{creator}]]></if>
+        <if test="created != null"><![CDATA[AND a.created_time = #{createdTime}]]></if>
+        <if test="modifier != null"><![CDATA[AND a.modifier = #{modifier}]]></if>
+        <if test="modifiedTime != null"><![CDATA[AND a.modified_time = #{modifiedTime}]]></if>
+    </sql>
+</mapper>

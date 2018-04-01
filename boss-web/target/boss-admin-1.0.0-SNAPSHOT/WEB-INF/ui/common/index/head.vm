@@ -1,0 +1,15 @@
+<div class="table-header">
+    $!{pageTitle}
+	#parse("common/toolbar/body.vm")
+</div>
+<div class="table-responsive">
+    <table id="$!{datatableIdentifier}" class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th style="width:5%;">
+                <label>
+                    <input id="$!{checkboxIdentifier}" type="checkbox" class="ace" title="全选/反选"/>
+                    <span class="lbl"></span>
+                </label>
+            </th>
+				

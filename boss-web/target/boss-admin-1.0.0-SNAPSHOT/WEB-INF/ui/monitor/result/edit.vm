@@ -1,0 +1,23 @@
+#parse("common/edit/head.vm")
+
+<tr>
+    <td width="20%;">应用：</td>
+    <td>$!{model.appName}</td>
+    <td width="20%;">类型：</td>
+    <td>$!{model.codeName}</td>
+</tr>
+<tr>
+    <td>结果：</td>
+    <td colspan="3">
+        $!{model.codeName}
+    </td>
+</tr>
+<tr>
+    <td>配置值：</td>
+    <td colspan="3">
+        $!{model.content}
+    </td>
+</tr>
+#parse("common/edit/append-fields.vm")
+
+#parse("common/edit/bottom.vm")

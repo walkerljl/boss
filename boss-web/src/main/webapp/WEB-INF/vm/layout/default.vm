@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>$!{appName}</title>
+    <meta name="keywords" content="www.walkerljl.com"/>
+    <meta name="description" content="www.walkerljl.com"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- basic styles -->
+    <link href="$!{staticRes}/template/ace/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="$!{staticRes}/template/ace/assets/css/font-awesome.min.css"/>
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="$!{staticRes}/template/ace/assets/css/font-awesome-ie7.min.css"/>
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <!-- fonts -->
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="$!{staticRes}/template/ace/assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="$!{staticRes}/template/ace/assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="$!{staticRes}/template/ace/assets/css/ace-skins.min.css"/>
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="$!{staticRes}/template/ace/assets/css/ace-ie.min.css"/>
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="$!{staticRes}/template/ace/assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="$!{staticRes}/template/ace/assets/js/html5shiv.js"></script>
+    <script src="$!{staticRes}/template/ace/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if !IE]> -->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='$!{staticRes}/template/ace/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='$!{staticRes}/template/ace/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+    </script>
+    <![endif]-->
+
+##jarvis plugin core module
+    <script src="$!{localStaticRes}/js/jarvis/jarvis.js?v=$!{v}"></script>
+    <script src="$!{localStaticRes}/js/jarvis/jarvis.message.js?v=$!{v}"></script>
+    <script src="$!{localStaticRes}/js/jarvis/jarvis.mvc.js?v=$!{v}"></script>
+</head>
+
+<body>
+<!-- 隐藏域-->
+<input type="hidden" id="contextPath" value="$!{contextPath}"/>
+<input type="hidden" id="objectIdentifierCode" value="$!{objectIdentifier.code}"/>
+<input type="hidden" id="currentUrl" value="$!{objectIdentifier.url}"/>
+<input type="hidden" id="isJarvisJsDebugEnabled" value="$!{isJarvisJsDebugEnabled}"/>
+<!-- 导航条-->
+    #parse("layout/navbar.vm")
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <!-- 侧边栏-->
+        #parse("layout/sidebar.vm")
+
+        <div class="main-content">
+            <!-- 面包屑导航条-->
+            #parse("layout/breadcrumb.vm")
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div id="main-content"> $!{screen_content}</div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+
+        <!-- 设置工具-->
+        #parse("layout/settings.vm")
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='$!{staticRes}/template/ace/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="$!{staticRes}/template/ace/assets/js/bootstrap.min.js"></script>
+<script src="$!{staticRes}/template/ace/assets/js/typeahead-bs2.min.js"></script>
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+<script src="$!{staticRes}/template/ace/assets/js/ace-elements.min.js"></script>
+<script src="$!{staticRes}/template/ace/assets/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script src="$!{staticRes}/js/require.js?v=$!{v}" defer async="true"></script>
+</body>
+</html>

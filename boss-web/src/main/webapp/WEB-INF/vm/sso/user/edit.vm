@@ -1,0 +1,35 @@
+#parse("common/edit/head.vm")
+
+<tr>
+    <td width="20%;">用户ID：</td>
+    <td colspan="3">#if ($!{editType} == "add" || $!{editType} == "edit")
+        <input type="text" id="userId" name="userId" style="width:100%;"
+               class="required" maxlength="64" #if($!{editType} == "edit") value="$!{model.userId}" #end/>
+    #else
+        $!{model.userId}
+    #end
+    </td>
+</tr>
+<tr>
+    <td width="20%;">用户名：</td>
+    <td colspan="3">#if ($!{editType} == "add" || $!{editType} == "edit")
+        <input type="text" id="userName" name="userName" style="width:100%;"
+               class="required" maxlength="64" #if($!{editType} == "edit") value="$!{model.userName}" #end/>
+    #else
+        $!{model.userName}
+    #end
+    </td>
+</tr>
+<tr>
+    <td width="20%;">昵称：</td>
+    <td colspan="3">#if ($!{editType} == "add" || $!{editType} == "edit")
+        <input type="text" id="alias" name="alias" style="width:100%;"
+               class="required" maxlength="64" #if($!{editType} == "edit") value="$!{model.alias}" #end/>
+    #else
+        $!{model.alias}
+    #end
+    </td>
+</tr>
+#parse("common/edit/append-fields.vm")
+
+#parse("common/edit/bottom.vm")

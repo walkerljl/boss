@@ -1,0 +1,59 @@
+<input type="hidden" id="appId" value="1"/>
+<div class="row-fluid">
+    <table class="table table-bordered table-striped formLayout m0" style="margin-bottom:0px;">
+        <tr>
+            <td class="textR">编码:</td>
+            <td>
+                <input type="text" id="s_code" name="s_code" placeholder="请输入编码"/>
+            </td>
+            <td class="textR">名称:</td>
+            <td>
+                <input type="text" id="s_name" name="s_name" placeholder="请输入名称"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="textR">状态:</td>
+            <td colspan="3">
+                <select id="s_status" name="s_status" style="width:25%;">
+                    <option value="undefined">--请选择--</option>
+                    #foreach($statusOption in $!{statusOptions})
+                        <option value="$!{statusOption.value}">$!{statusOption.name}</option>
+                    #end
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="widget-box">
+            <div class="widget-header">
+                <h4 class="smaller">
+                    应用菜单树
+                </h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <ul id="appResMenuTree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- /span -->
+
+    <div class="col-sm-9">
+        <div class="widget-box">
+            <div class="widget-header">
+                <h4 class="smaller">菜单基本信息</h4>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main" id="appResMenuForm"></div>
+            </div>
+        </div>
+    </div><!-- /span -->
+</div><!-- /row -->
+<script src="$!{staticRes}/plugin/zTree/jquery.ztree.core-3.5.js?v=$!{v}"></script>
+<script src="$!{staticRes}/plugin/zTree/jquery.ztree.excheck-3.5.js?v=$!{v}"></script>
+<script src="$!{staticRes}/plugin/zTree/jquery.ztree.exedit-3.5.min.js?v=$!{v}"></script>
+<link rel="stylesheet" href="$!{staticRes}/plugin/zTree/css/zTreeStyle.css?v=$!{v}"/>
+<script src="$!{localStaticRes}/js/auth/res/menu.js?v=$!{v}"></script>
