@@ -2,7 +2,6 @@ package org.walkerljl.boss.dao.dataobject.sso;
 
 import java.util.Date;
 
-import org.walkerljl.boss.model.enums.sso.AgentType;
 import org.walkerljl.boss.support.dao.dataobject.JqueryDatatableBaseDO;
 import org.walkerljl.toolkit.db.api.annotation.Column;
 import org.walkerljl.toolkit.db.api.annotation.Entity;
@@ -80,25 +79,6 @@ public class UserDO extends JqueryDatatableBaseDO {
     public UserDO() {}
 
     //自定义方法
-
-    /**
-     * 获取最新登录终端类型
-     *
-     * @return
-     */
-    public AgentType getLastLoginAgentType() {
-        return AgentType.getType(lastLoginAgent);
-    }
-
-    /**
-     * 获取最新登录终端名称
-     *
-     * @return
-     */
-    public String getLastLoginAgentName() {
-        AgentType agentType = getLastLoginAgentType();
-        return agentType == null ? "" : agentType.getName();
-    }
 
     public String getUserId() {
         return userId;

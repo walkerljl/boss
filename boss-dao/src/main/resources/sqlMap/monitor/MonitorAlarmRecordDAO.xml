@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.walkerljl.boss.dao.daointerface.monitor.MonitorAlarmRecordDAO">
+    <!-- ======================= 以下sql需要根据表结构自定义 Begin=========================================================================== -->
+    <!-- 定义实体映射 -->
+    <resultMap type="monitorAlarmRecord" id="resultMap">
+        <result property="id" column="id"/>
+        <result property="bizCode" column="biz_code"/>
+        <result property="bizName" column="biz_name"/>
+        <result property="objId" column="obj_id"/>
+        <result property="objName" column="obj_name"/>
+        <result property="data" column="data"/>
+        <result property="dataTime" column="data_time"/>
+        <result property="content" column="content"/>
+        <result property="time" column="time"/>
+        <result property="level" column="level"/>
+        <result property="channels" column="channels"/>
+        <result property="receivers" column="receivers"/>
+        <result property="remark" column="remark"/>
+        <result property="extInfo" column="ext_info"/>
+        <result property="status" column="status"/>
+        <result property="creator" column="creator"/>
+        <result property="createdTime" column="gmt_create"/>
+        <result property="modifier" column="modifier"/>
+        <result property="modifiedTime" column="gmt_modified"/>
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="TABLE_NAME"><![CDATA[monitor_alarm_record]]></sql>
+
+    <!-- 实体对应表中的所有字段 -->
+    <sql id="QUERY_COLUMN_LIST">
+        <![CDATA[
+              a.id
+              ,a.biz_code
+              ,a.biz_name
+              ,a.obj_id
+              ,a.obj_name
+              ,a.data
+              ,a.data_time
+              ,a.content
+              ,a.time
+              ,a.level
+              ,a.channels
+              ,a.receivers
+              ,a.remark
+              ,a.ext_info
+              ,a.status
+              ,a.creator
+              ,a.gmt_create
+              ,a.modifier
+              ,a.gmt_modified
+        ]]>
+    </sql>
+
+    <!-- 插入字段 -->
+    <sql id="INSERT_COLUMNS">
+        <![CDATA[(
+              biz_code
+              ,biz_name
+              ,obj_id
+              ,obj_name
+              ,`data`
+              ,data_time
+              ,`level`
+              ,content
+              ,`time`
+              ,`channels`
+              ,receivers
+          ]]>
+        <![CDATA[
+              ,remark
+              ,ext_info
+              ,status
+              ,creator
+              ,gmt_create
+              ,modifier
+              ,gmt_modified
+          )]]>
+    </sql>
+
+    <!-- 插入字段值 -->
+    <sql id="INSERT_VALUES">
+        <![CDATA[(
+              #{bizCode}
+              ,#{bizName}
+              ,#{objId}
+              ,#{objName}
+              ,#{data}
+              ,#{dataTime}
+              ,#{level}
+              ,#{content}
+              ,#{time}
+              ,#{channels}
+              ,#{receivers}
+          ]]>
+        <![CDATA[
+              ,#{remark}
+              ,#{extInfo}
+              ,#{status}
+              ,#{creator}
+              ,#{createdTime}
+              ,#{modifier}
+              ,#{modifiedTime}
+          )]]>
+    </sql>
+
+
+    <!-- ======================= 自定义SQL End =========================================================================== -->
+    <!-- ======================= 以下sql只需要修改 parameterType值 =========================================================================== -->
+    <!-- 添加,自动填充主键字段值 -->
+    <insert id="save" parameterType="monitorAlarmRecord" useGeneratedKeys="true"
+            keyProperty="id">
+        <![CDATA[insert into]]>
+        <include refid="TABLE_NAME"/>
+        <include refid="INSERT_COLUMNS"/>
+        <![CDATA[values]]>
+        <include refid="INSERT_VALUES"/>
+    </insert>
+
+    <update id="markAlarmRecordToCompleted" parameterType="java.util.Map">
+        <![CDATA[update]]>
+        <include refid="TABLE_NAME"/>
+        <![CDATA[
+            set
+              status = '31'
+              ,gmt_modified = now()
+            where
+              biz_code = #{bizCode}
+            and
+              obj_id = #{objId}
+            and
+              id = #{id}
+        ]]>
+    </update>
+
+    <select id="getAlarmRecord" parameterType="java.util.Map" resultMap="resultMap">
+        <![CDATA[select]]>
+        <include refid="QUERY_COLUMN_LIST"/>
+        <![CDATA[FROM]]>
+        <include refid="TABLE_NAME"/>
+        <![CDATA[
+                a
+              where
+                a.biz_code = #{bizCode}
+              and
+                a.obj_id = #{objId}
+              and
+                a.id = #{id}
+              and
+                a.status != '20'
+        ]]>
+    </select>
+</mapper>

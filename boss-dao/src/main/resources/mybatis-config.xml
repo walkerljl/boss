@@ -16,16 +16,40 @@
 
     <!-- 全局别名设置，在映射文件中只需写别名，而不必写出整个类路径 -->
     <typeAliases>
-        <!--<typeAlias type="org.walkerljl.commons.data.model.tree.TreeNode" alias="treeNode"/>-->
         <typeAlias type="org.walkerljl.boss.dao.dataobject.sso.UserDO" alias="user"/>
         <typeAlias type="org.walkerljl.boss.dao.dataobject.auth.res.MenuDO" alias="menu"/>
+
+        <!-- task begin-->
+        <typeAlias type="org.walkerljl.boss.dao.dataobject.task.TaskDO" alias="task"/>
+        <typeAlias type="org.walkerljl.boss.dao.dataobject.task.TaskParamDO" alias="taskParam"/>
+        <typeAlias type="org.walkerljl.boss.dao.dataobject.task.TaskLogDO" alias="taskLog"/>
+        <!-- task end-->
+
+        <!-- monitor begin-->
+        <typeAlias type="org.walkerljl.boss.dao.dataobject.monitor.MonitorObjMetaDataDO" alias="monitorObjMetaData"/>
+        <typeAlias type="org.walkerljl.boss.dao.dataobject.monitor.MonitorDataDO" alias="monitorData"/>
+        <typeAlias type="org.walkerljl.boss.dao.dataobject.monitor.AlarmRuleDO" alias="monitorAlarmRule"/>
+        <typeAlias type="org.walkerljl.boss.dao.dataobject.monitor.AlarmRecordDO" alias="monitorAlarmRecord"/>
+        <!-- monitor end-->
     </typeAliases>
 
     <!-- 映射文件路径-->
     <mappers>
         <!--<mapper resource="org.walkerljl.boss.sdk.support.dao.daointerface/BaseDAO.xml"/>-->
         <!--<mapper resource="sqlMap/sso/UserDAO.xml"/>-->
-        <!--<mapper resource="sqlMap/auth/res/MenuDAO.xml"/>-->
+
+        <!-- task begin-->
+        <mapper resource="sqlMap/task/TaskDAO.xml"/>
+        <mapper resource="sqlMap/task/TaskParamDAO.xml"/>
+        <mapper resource="sqlMap/task/TaskLogDAO.xml"/>
+        <!-- task end-->
+
+        <!-- monitor begin-->
+        <mapper resource="sqlMap/monitor/MonitorObjMetaDataDAO.xml"/>
+        <mapper resource="sqlMap/monitor/MonitorDataDAO.xml"/>
+        <mapper resource="sqlMap/monitor/MonitorAlarmRuleDAO.xml"/>
+        <mapper resource="sqlMap/monitor/MonitorAlarmRecordDAO.xml"/>
+        <!-- monitor end-->
     </mappers>
 
 </configuration>

@@ -9,10 +9,10 @@ import org.walkerljl.boss.support.mvc.auth.AuthenticationErrorCode;
 import org.walkerljl.boss.support.mvc.auth.AuthenticationException;
 import org.walkerljl.boss.support.mvc.exception.AbstractExceptionHandler;
 import org.walkerljl.boss.support.mvc.util.ResponseUtils;
-import org.walkerljl.toolkit.logging.Logger;
-import org.walkerljl.toolkit.logging.LoggerFactory;
 import org.walkerljl.toolkit.standard.Result;
-import org.walkerljl.toolkit.template.log.LoggerUtil;
+import org.walkerljl.toolkit.template.log.Logger;
+import org.walkerljl.toolkit.template.log.LoggerFactory;
+import org.walkerljl.toolkit.template.log.util.LoggerUtil;
 
 /**
  * @author xingxun

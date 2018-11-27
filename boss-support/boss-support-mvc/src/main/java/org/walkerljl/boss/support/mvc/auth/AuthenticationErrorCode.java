@@ -39,13 +39,8 @@ public enum AuthenticationErrorCode implements ErrorCode {
         this.description = description;
     }
 
-    /**
-     * 通过编码获取枚举对象
-     *
-     * @param code 编码
-     * @return
-     */
-    public static AuthenticationErrorCode getByCode(String code) {
+    @Override
+    public AuthenticationErrorCode getEnumObject(String code) {
         for (AuthenticationErrorCode item : AuthenticationErrorCode.values()) {
             if (item.getCode().equals(code)) {
                 return item;

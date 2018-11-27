@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.walkerljl.boss.dao.daointerface.monitor.MonitorAlarmRuleDAO">
+    <!-- ======================= 以下sql需要根据表结构自定义 =========================================================================== -->
+    <!-- 定义实体映射 -->
+    <resultMap type="monitorAlarmRule" id="resultMap">
+        <result property="id" column="id"/>
+        <result property="bizCode" column="biz_code"/>
+        <result property="objId" column="obj_id"/>
+        <result property="type" column="type"/>
+        <result property="expression" column="expression"/>
+        <result property="channels" column="channels"/>
+        <result property="remark" column="remark"/>
+        <result property="extInfo" column="ext_info"/>
+        <result property="status" column="status"/>
+        <result property="creator" column="creator"/>
+        <result property="createdTime" column="gmt_create"/>
+        <result property="modifier" column="modifier"/>
+        <result property="modifiedTime" column="gmt_modified"/>
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="TABLE_NAME"><![CDATA[monitor_alarm_rule]]></sql>
+
+    <!-- 实体对应表中的所有字段 -->
+    <sql id="QUERY_COLUMN_LIST">
+        <![CDATA[
+              a.id
+              ,a.biz_code
+              ,a.obj_id
+              ,a.type
+              ,a.expression
+              ,a.channels
+              ,a.remark
+              ,a.ext_info
+              ,a.status
+              ,a.creator
+              ,a.gmt_create
+              ,a.modifier
+              ,a.gmt_modified
+        ]]>
+    </sql>
+
+    <!-- ======================= 自定义SQL =========================================================================== -->
+    <!-- ======================= 以下sql只需要修改 parameterType值 =========================================================================== -->
+
+    <!-- 查询,字段不为NULL则为条件 -->
+    <select id="listByBizCodeAndObjId" parameterType="java.util.Map" resultMap="resultMap">
+        <![CDATA[select]]>
+        <include refid="QUERY_COLUMN_LIST"/>
+        <![CDATA[from]]>
+        <include refid="TABLE_NAME"/>
+        <![CDATA[
+              a
+            where
+              a.biz_code = #{bizCode}
+            and
+              a.obj_id = #{objId}
+            and
+              a.status = '10'
+        ]]>
+    </select>
+</mapper>

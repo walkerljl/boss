@@ -79,6 +79,11 @@ public enum SysLogTypeEnum implements IEnum {
     }
 
     @Override
+    public SysLogTypeEnum getEnumObject(String code) {
+        return getByCode(code);
+    }
+
+    @Override
     public String getCode() {
         return code;
     }

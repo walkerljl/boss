@@ -29,11 +29,6 @@
         </dependency>
         <dependency>
             <groupId>org.walkerljl</groupId>
-            <artifactId>boss-dao</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.walkerljl</groupId>
             <artifactId>boss-client</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

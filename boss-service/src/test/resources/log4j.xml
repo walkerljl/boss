@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!--  Log4j配置文件。-->
+<log4j:configuration>
+
+    <appender name="STDOUT-APPENDER" class="org.apache.log4j.ConsoleAppender">
+        <param name="encoding" value="UTF-8"/>
+        <param name="target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="STDERR-APPENDER" class="org.apache.log4j.ConsoleAppender">
+        <param name="encoding" value="UTF-8"/>
+        <param name="target" value="System.err"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="ERROR-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/common-error.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="error"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- [公共Appender] 默认 -->
+    <appender name="DEFAULT-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/common-default.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <!-- Task APPENDER begin-->
+    <appender name="TASK-DEFAULT-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/default.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="TASK-SAL-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/sal-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="TASK-SAL-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/sal.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="TASK-BROKER-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/broker-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="TASK-BROKER-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/broker.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="TASK-DISPATCH-SPLIT-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/dispatch-split-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="TASK-DISPATCH-TASK-SPLIT-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/dispatch-split.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="TASK-DISPATCH-LOAD-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/dispatch-load-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="TASK-DISPATCH-LOAD-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/dispatch-load.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="TASK-DISPATCH-EXECUTE-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/dispatch-execute-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="TASK-DISPATCH-EXECUTE-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/dispatch-execute.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="TASK-EXECUTE-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/execute-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="TASK-EXECUTE-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/execute.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="TASK-ALARMER-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/alarmer-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="TASK-ALARMER-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/task/alarmer.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <!-- Task APPENDER end-->
+
+    <!-- Monitor APPENDER begin-->
+    <appender name="MONITOR-DEFAULT-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/default.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="MONITOR-SAL-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/sal-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="MONITOR-SAL-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/sal.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="MONITOR-ANALYZE-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/analyze-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="MONITOR-ANALYZE-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/analyze.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="MONITOR-NOTIFIER-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/notifier-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="MONITOR-NOTIFIER-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/notifier.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="MONITOR-ALARMER-DIGEST-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/alarmer-digest.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="MONITOR-ALARMER-DETAIL-APPENDER"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="/Users/walkerljl/logs/walkerljl/boss/monitor/alarmer.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- Monitor APPENDER end-->
+
+    <!--  ========================================================= -->
+    <logger name="STDOUT" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="STDERR" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="STDERR-APPENDER"/>
+    </logger>
+    <!-- Task LOGGER begin-->
+    <logger name="TASK_DEFAULT" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-DEFAULT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="TASK_SAL_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-SAL-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="TASK_SAL_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-SAL-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="TASK_BROKER_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-BROKER-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="TASK_BROKER_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-BROKER-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="TASK_DISPATCH_SPLIT_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-DISPATCH-SPLIT-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="TASK_DISPATCH_SPLIT_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-DISPATCH-SPLIT-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="TASK_DISPATCH_LOAD_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-DISPATCH-LOAD-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="TASK_DISPATCH_LOAD_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-DISPATCH-LOAD-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="TASK_DISPATCH_EXECUTE_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-DISPATCH-EXECUTE-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="TASK_DISPATCH_EXECUTE_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-DISPATCH-EXECUTE-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="TASK_ALARMER_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-ALARMER-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="TASK_ALARMER_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TASK-ALARMER-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+    <!-- Task LOGGER end-->
+
+    <!-- Monitor LOGGER begin-->
+    <logger name="MONITOR_DEFAULT" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-DEFAULT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="MONITOR_SAL_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-SAL-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="MONITOR_SAL_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-SAL-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="MONITOR_ANALYZE_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-ANALYZE-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="MONITOR_ANALYZE_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-ANALYZE-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="MONITOR_NOTIFIER_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-NOTIFIER-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="MONITOR_NOTIFIER_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-NOTIFIER-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="MONITOR_ALARMER_DIGEST" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-ALARMER-DIGEST-APPENDER"/>
+    </logger>
+    <logger name="MONITOR_ALARMER_DETAIL" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="MONITOR-ALARMER-DETAIL-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+    <!-- Monitor LOGGER end-->
+
+    <logger name="org.walkerljl.toolkit.db" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="DEFAULT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDERR-APPENDER"/>
+    </logger>
+
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="DEFAULT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+        <appender-ref ref="STDERR-APPENDER"/>
+    </root>
+
+</log4j:configuration>
+

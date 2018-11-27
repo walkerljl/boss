@@ -24,9 +24,9 @@ import org.walkerljl.boss.support.mvc.util.UrlEncoderUtils;
 import org.walkerljl.toolkit.lang.ArraysUtils;
 import org.walkerljl.toolkit.lang.SetUtils;
 import org.walkerljl.toolkit.lang.StringUtils;
-import org.walkerljl.toolkit.logging.Logger;
-import org.walkerljl.toolkit.logging.LoggerFactory;
-import org.walkerljl.toolkit.template.log.LoggerUtil;
+import org.walkerljl.toolkit.template.log.Logger;
+import org.walkerljl.toolkit.template.log.LoggerFactory;
+import org.walkerljl.toolkit.template.log.util.LoggerUtil;
 
 /**
  * DefaultAuthenticator

@@ -37,6 +37,16 @@ public enum UserTypeEnum implements IEnum {
         this.description = description;
     }
 
+    @Override
+    public StatusEnum getEnumObject(String code) {
+        for (StatusEnum item : StatusEnum.values()) {
+            if (item.getCode().equals(code)) {
+                return item;
+            }
+        }
+
+        return null;
+    }
 
     @Override
     public String getCode() {

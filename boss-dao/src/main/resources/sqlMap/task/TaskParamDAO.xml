@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.walkerljl.boss.dao.daointerface.task.TaskParamDAO">
+    <!-- ======================= 以下sql需要根据表结构自定义 Begin=========================================================================== -->
+    <!-- 定义实体映射 -->
+    <resultMap type="taskParam" id="resultMap">
+        <result property="id" column="id"/>
+        <result property="bizCode" column="biz_code"/>
+        <result property="bizId" column="biz_id"/>
+        <result property="taskId" column="task_id"/>
+        <result property="value" column="value"/>
+        <result property="remark" column="remark"/>
+        <result property="extInfo" column="ext_info"/>
+        <result property="status" column="status"/>
+        <result property="creator" column="creator"/>
+        <result property="createdTime" column="gmt_create"/>
+        <result property="modifier" column="modifier"/>
+        <result property="modifiedTime" column="gmt_modified"/>
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="TABLE_NAME"><![CDATA[task_param]]></sql>
+
+    <!-- 插入字段 -->
+    <sql id="INSERT_COLUMNS">
+        <![CDATA[(
+              biz_code
+              ,biz_id
+              ,task_id
+              ,`value`
+          ]]>
+        <![CDATA[
+              ,remark
+              ,ext_info
+              ,status
+              ,creator
+              ,gmt_create
+              ,modifier
+              ,gmt_modified
+          )]]>
+    </sql>
+
+    <!-- 插入字段值 -->
+    <sql id="INSERT_VALUES">
+        <![CDATA[(
+              #{bizCode}
+              ,#{bizId}
+              ,#{taskId}
+              ,#{value}
+          ]]>
+        <![CDATA[
+              ,#{remark}
+              ,#{extInfo}
+              ,#{status}
+              ,#{creator}
+              ,#{createdTime}
+              ,#{modifier}
+              ,#{modifiedTime}
+          )]]>
+    </sql>
+
+    <!-- 实体对应表中的所有字段 -->
+    <sql id="QUERY_COLUMN_LIST">
+        <![CDATA[
+              a.id
+              ,a.biz_code
+              ,a.biz_id
+              ,a.task_id
+              ,a.value
+              ,a.remark
+              ,a.ext_info
+              ,a.status
+              ,a.creator
+              ,a.gmt_create
+              ,a.modifier
+              ,a.gmt_modified
+        ]]>
+    </sql>
+
+
+
+    <!-- ======================= 自定义SQL End =========================================================================== -->
+    <!-- ======================= 以下sql只需要修改 parameterType值 =========================================================================== -->
+    <!-- 添加,自动填充主键字段值 -->
+    <insert id="save" parameterType="taskParam" useGeneratedKeys="true"
+            keyProperty="id">
+        <![CDATA[insert into]]>
+        <include refid="TABLE_NAME"/>
+        <include refid="INSERT_COLUMNS"/>
+        <![CDATA[values]]>
+        <include refid="INSERT_VALUES"/>
+    </insert>
+
+    <select id="list" parameterType="java.util.Map" resultMap="resultMap">
+        <![CDATA[SELECT]]>
+        <include refid="QUERY_COLUMN_LIST"/>
+        <![CDATA[FROM]]>
+        <include refid="TABLE_NAME"/>
+        <![CDATA[a]]>
+        <![CDATA[
+            where
+              a.biz_code = #{bizCode}
+            and
+              a.biz_id = #{bizId}
+            and
+              a.task_id = #{taskId}
+            and
+              a.status = '10'
+        ]]>
+    </select>
+</mapper>

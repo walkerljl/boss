@@ -49,13 +49,8 @@ public enum EditTypeEnum implements IEnum {
         this.description = description;
     }
 
-    /**
-     * 通过编码获取类型对象
-     *
-     * @param code 编码
-     * @return
-     */
-    public static EditTypeEnum getByCode(String code) {
+    @Override
+    public EditTypeEnum getEnumObject(String code) {
 
         for (EditTypeEnum item : EditTypeEnum.values()) {
             if (item.getCode().equals(code)) {

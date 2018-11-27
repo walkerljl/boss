@@ -1,48 +1,64 @@
 
 /**
- * SSO user
+ * sso_user
  */
-insert into sso_user(id,user_id,user_name,alias,email,mobile,password,salt,last_login_time,last_login_ip,last_login_agent,remark,status,creator,created_time,modifier,modified_time)
+insert into sso_user(id, user_id, user_name, alias, email, mobile, password, salt, last_login_time, last_login_ip, last_login_agent, remark, status, creator, created_time, modifier, modified_time)
 values
-(1,'admin','Admin','Admin','','','9b938fd2549ff2ee','65117591',NOW(),'127.0.0.1',1,'',1,'lijunlin',NOW(),'lijunlin',NOW());
+(1, 'admin', '系统管理员', '系统管理员', 'admin@walkerljl.com', '17780580001', '9b938fd2549ff2ee', '65117591', NOW(), '127.0.0.1', 1, '', 1, 'xingxun', NOW(), 'xingxun', NOW()),
+(2, 'jarvis', '贾维斯', '贾维斯', 'jarvis@walkerljl.com', '17780580002', '9b938fd2549ff2ee', '65117591', NOW(), '127.0.0.1', 1, '', 1, 'xingxun', NOW(), 'xingxun', NOW()),
+(3, 'xingxun', '行寻', '行寻', 'xingxun@walkerljl.com', '17780580003', '9b938fd2549ff2ee', '65117591', NOW(), '127.0.0.1', 1, '', 1, 'xingxun', NOW(), 'xingxun', NOW())
+;
+
+/**
+ * sso_login_info
+ */
+insert into sso_login_info(id, user_id, user_name, login_ip, login_time, logout_time, login_agent)
+values
+(1, 'admin', '系统管理员', '127.0.0.1', NOW(), NOW(), 1),
+(2, 'xingxun', '行寻' ,'127.0.0.1', NOW(), NOW(), 1),
+(3, 'test1', 'test1', '127.0.0.1', NOW(), NOW(), 1),
+(4, 'test2', 'test2', '127.0.0.1', NOW(), NOW(), 1),
+(5, 'xingxun', '行寻' ,'127.0.0.1', NOW(), NOW(), 1)
+;
+
 /**
  * 应用
  */
 insert into id_app(id,name,code,domain,icon,share_role_id,use_post_auth,manager_id,manager_name,token,remark,status,creator,created_time,modifier,modified_time)
 values
-(1,'BOSS系统','idm','//boss.walkerljl.com','',0,0,'','','x','',1,'lijunlin',NOW(),'lijunlin',NOW());
+(1,'BOSS系统','idm','//boss.walkerljl.com','',0,0,'','','x','',1,'xingxun',NOW(),'xingxun',NOW());
 
 /**
  * 应用配置
  */
 INSERT INTO app_config(app_id,name,`key`,`value`,remark,status,creator,created_time,modifier,modified_time)
 VALUES
-(1,'系统是否正在升级','app.upgrading','false','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(1,'系统管理员列表','admins','admin','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(1,'系统管理员邮件列表','admin.mail.list','x@163.com','',1,'lijunlin',NOW(),'lijunlin',NOW());
+(1,'系统是否正在升级','app.upgrading','false','',1,'xingxun',NOW(),'xingxun',NOW()),
+(1,'系统管理员列表','admins','admin','',1,'xingxun',NOW(),'xingxun',NOW()),
+(1,'系统管理员邮件列表','admin.mail.list','x@163.com','',1,'xingxun',NOW(),'xingxun',NOW());
 
 /**
  * 资源码
  */
 insert into auth_res_code(id,app_id,name,code,parent_id,res_type,sensitive_type,approver_id,approver_name,remark,status,creator,created_time,modifier,modified_time)
 values
-(1,0,'首页','index',0,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(2,1,'系统配置','sys',1,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(3,1,'应用管理','sys_app',2,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(4,1,'配置管理','sys_config',2,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(5,1,'日志管理','sys_log',2,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(6,1,'任务调度管理','sys_schedule',2,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(7,1,'调度日志管理','sys_schedule_log',2,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(8,0,'单点登录','sso',0,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(9,1,'用户管理','sso_user',8,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(10,1,'日志管理','sso_logininfo',8,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(11,1,'权限管理','auth',0,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(12,1,'部门管理','auth_dept',11,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(13,1,'岗位管理','auth_post',11,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(14,0,'角色管理','auth_role',11,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(15,1,'应用资源管理','auth_res',11,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(16,1,'访问授权管理','auth_auth',11,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW()),
-(17,1,'权限批量操作','auth_batchoper',11,1,0,'','','',1,'lijunlin',NOW(),'lijunlin',NOW());
+(1,0,'首页','index',0,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(2,1,'系统配置','sys',1,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(3,1,'应用管理','sys_app',2,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(4,1,'配置管理','sys_config',2,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(5,1,'日志管理','sys_log',2,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(6,1,'任务调度管理','sys_schedule',2,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(7,1,'调度日志管理','sys_schedule_log',2,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(8,0,'单点登录','sso',0,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(9,1,'用户管理','sso_user',8,1,0,'','','',1,'xingxun',NOW(),'lijuxingxunnlin',NOW()),
+(10,1,'日志管理','sso_logininfo',8,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(11,1,'权限管理','auth',0,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(12,1,'部门管理','auth_dept',11,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(13,1,'岗位管理','auth_post',11,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(14,0,'角色管理','auth_role',11,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(15,1,'应用资源管理','auth_res',11,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(16,1,'访问授权管理','auth_auth',11,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW()),
+(17,1,'权限批量操作','auth_batchoper',11,1,0,'','','',1,'xingxun',NOW(),'xingxun',NOW());
 
 /**
  * 菜单
@@ -72,7 +88,7 @@ values
  */
 insert into auth_au_role(id,app_id,name,remark,status,creator,created_time,modifier,modified_time)
 values
-(1,1,'系统管理员','',1,'lijunlin',NOW(),'lijunlin',NOW());
+(1,1,'系统管理员','',1,'xingxun',NOW(),'xingxun',NOW());
 
 /**
  * 角色、资源码授权
@@ -101,4 +117,4 @@ values
  */
 insert into auth_au_auth(object_type,object_id,auth_type,auth_id,start_time,end_time,remark,status,creator,created_time,modifier,modified_time)
 values
-(1,'admin',1,1,null,null,'',1,'lijunlin',NOW(),'lijunlin',NOW());
+(1,'admin',1,1,null,null,'',1,'xingxun',NOW(),'xingxun',NOW());

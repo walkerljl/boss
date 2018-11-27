@@ -20,12 +20,12 @@ public abstract class BaseIntegrationTest {
     protected final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
     @Before
-    public void before() {
+    public void init() {
 
     }
 
     @After
-    public void after() {
+    public void destroy() {
 
     }
 }

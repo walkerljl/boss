@@ -114,7 +114,7 @@ public class JSONUtils {
         if (StringUtils.isBlank(text)) {
             return null;
         }
-        return (List<T>) JSONObject.parseArray(text, clazz);
+        return JSONObject.parseArray(text, clazz);
     }
 
     /**

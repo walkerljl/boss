@@ -17,5 +17,17 @@
             <artifactId>boss-support-model</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>boss-dao</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- json begin-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <!-- json end-->
     </dependencies>
 </project>

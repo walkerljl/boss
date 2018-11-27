@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.walkerljl.boss.dao.daointerface.task.TaskLogDAO">
+    <!-- ======================= 以下sql需要根据表结构自定义 Begin=========================================================================== -->
+
+    <!-- 表名 -->
+    <sql id="TABLE_NAME"><![CDATA[task_log]]></sql>
+
+    <!-- 插入字段 -->
+    <sql id="INSERT_COLUMNS">
+        <![CDATA[(
+              biz_code
+              ,biz_id
+              ,task_id
+              ,attempts
+              ,description
+          ]]>
+        <![CDATA[
+              ,remark
+              ,ext_info
+              ,status
+              ,creator
+              ,gmt_create
+              ,modifier
+              ,gmt_modified
+          )]]>
+    </sql>
+
+    <!-- 插入字段值 -->
+    <sql id="INSERT_VALUES">
+        <![CDATA[(
+              #{bizCode}
+              ,#{bizId}
+              ,#{taskId}
+              ,#{attempts}
+              ,#{description}
+          ]]>
+        <![CDATA[
+              ,#{remark}
+              ,#{extInfo}
+              ,#{status}
+              ,#{creator}
+              ,#{createdTime}
+              ,#{modifier}
+              ,#{modifiedTime}
+          )]]>
+    </sql>
+
+
+    <!-- ======================= 自定义SQL End =========================================================================== -->
+    <!-- ======================= 以下sql只需要修改 parameterType值 =========================================================================== -->
+    <!-- 添加,自动填充主键字段值 -->
+    <insert id="save" parameterType="taskLog" useGeneratedKeys="true"
+            keyProperty="id">
+        <![CDATA[insert into]]>
+        <include refid="TABLE_NAME"/>
+        <include refid="INSERT_COLUMNS"/>
+        <![CDATA[values]]>
+        <include refid="INSERT_VALUES"/>
+    </insert>
+</mapper>

@@ -2,7 +2,6 @@ package org.walkerljl.boss.dao.dataobject.sso;
 
 import java.util.Date;
 
-import org.walkerljl.boss.model.enums.sso.AgentType;
 import org.walkerljl.boss.support.dao.dataobject.JqueryDatatableBaseDONoRule;
 import org.walkerljl.toolkit.db.api.annotation.Column;
 import org.walkerljl.toolkit.db.api.annotation.Entity;
@@ -56,25 +55,6 @@ public class LoginInfoDO extends JqueryDatatableBaseDONoRule {
     public LoginInfoDO() {}
 
     //自定义方法
-
-    /**
-     * 获取登录终端类型
-     *
-     * @return
-     */
-    public AgentType getLoginAgentType() {
-        return AgentType.getType(loginAgent);
-    }
-
-    /**
-     * 获取登录终端名称
-     *
-     * @return
-     */
-    public String getLoginAgentName() {
-        AgentType agentType = getLoginAgentType();
-        return agentType == null ? "" : agentType.getName();
-    }
 
     //getters and setters
 

@@ -60,6 +60,11 @@ public enum StatusEnum implements IEnum {
     }
 
     @Override
+    public StatusEnum getEnumObject(String code) {
+        return getByCode(code);
+    }
+
+    @Override
     public String getCode() {
         return code;
     }
