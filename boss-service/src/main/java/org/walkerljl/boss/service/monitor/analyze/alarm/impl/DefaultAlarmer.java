@@ -13,8 +13,6 @@ import org.walkerljl.boss.service.monitor.model.alarm.AlarmRecord;
 import org.walkerljl.boss.service.monitor.model.alarm.enums.AlarmChannelEnum;
 import org.walkerljl.boss.service.task.impl.TaskExecutionContext;
 import org.walkerljl.boss.service.task.impl.abstracts.AbstractTaskHandler;
-import org.walkerljl.toolkit.standard.resource.exception.CannotDestroyResourceException;
-import org.walkerljl.toolkit.standard.resource.exception.CannotInitResourceException;
 import org.walkerljl.toolkit.template.log.Logger;
 import org.walkerljl.toolkit.template.log.LoggerFactory;
 import org.walkerljl.toolkit.template.log.model.InvocationInfo;
@@ -68,16 +66,6 @@ public class DefaultAlarmer extends AbstractTaskHandler implements Alarmer {
             LoggerDigestUtil.logDigest(invocationInfo, DIGEST_LOGGER);
             LoggerDetailUtil.logDetail(invocationInfo, DETAIL_LOGGER);
         }
-    }
-
-    @Override
-    public void processInit() throws CannotInitResourceException {
-
-    }
-
-    @Override
-    public void processDestroy() throws CannotDestroyResourceException {
-
     }
 
     @Override
