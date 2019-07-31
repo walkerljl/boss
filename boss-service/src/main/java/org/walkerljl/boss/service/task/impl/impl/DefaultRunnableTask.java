@@ -1,12 +1,8 @@
 package org.walkerljl.boss.service.task.impl.impl;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.sql.DataSource;
 
 import org.walkerljl.boss.common.util.ThrowableUtil;
 import org.walkerljl.boss.service.task.TaskHandler;
@@ -24,7 +20,6 @@ import org.walkerljl.boss.service.task.impl.util.TaskLogBuilder;
 import org.walkerljl.boss.service.task.model.Task;
 import org.walkerljl.boss.service.task.model.TaskLog;
 import org.walkerljl.boss.service.task.model.TaskParam;
-import org.walkerljl.boss.service.task.shell.dispatch.exception.TaskExecutionException;
 import org.walkerljl.toolkit.template.handle.service.ServiceAssertUtil;
 import org.walkerljl.toolkit.template.log.Logger;
 import org.walkerljl.toolkit.template.log.LoggerFactory;
@@ -46,13 +41,10 @@ public class DefaultRunnableTask implements RunnableTask {
     private TaskExecutionContext context;
     /** 任务业务接口*/
     private TaskService          taskService;
-    /** 数据源*/
-    private DataSource dataSource;
 
-    public DefaultRunnableTask(TaskExecutionContext context, TaskService taskService, DataSource dataSource) {
+    public DefaultRunnableTask(TaskExecutionContext context, TaskService taskService) {
         this.context = context;
         this.taskService = taskService;
-        this.dataSource = dataSource;
     }
 
     @Override
@@ -123,14 +115,12 @@ public class DefaultRunnableTask implements RunnableTask {
     private void handleTask(TaskExecutionContext context, String handlerId) {
         TaskHandler handler = TaskHandlerRepositoryFactory.getDefaultRepository()
                 .lookup(handlerId);
-        if (handler == null) {
-            return;
-        }
+        ServiceAssertUtil.assertParam(handler != null, "handler");
         context.setAttribute(TaskExecutionContext.TASK_HANDLER, handler);
         handler.handle(context);
     }
 
-    private void unlockAndRecordLog(TaskExecutionContext context, Task task, InvocationInfo invocationInfo) throws SQLException {
+    private void unlockAndRecordLog(TaskExecutionContext context, Task task, InvocationInfo invocationInfo) {
         Date nextRetryTime = TaskExecutionIntervalCalculator.calculateNextRetryTime(task.getRetryRule(), task.getAttempts() + 1);
         TaskLog taskLog = null;
         String errorMsg = null;
@@ -141,33 +131,20 @@ public class DefaultRunnableTask implements RunnableTask {
             taskLog = TaskLogBuilder.buildFailureTaskLog(task, errorMsg);
         }
 
-        Connection connection = dataSource.getConnection();
-        ServiceAssertUtil.assertParam(connection != null, "connection");
-        try {
-            //开启事务
-            connection.setAutoCommit(false);
-
-            //业务回调
-            TaskHandler taskHandler = (TaskHandler) context.getAttribute(TaskExecutionContext.TASK_HANDLER);
-            if (taskHandler != null) {
-                taskHandler.handleInTransactionAfterRun(context);
-            }
-
-            //解锁监控数据
-            if (invocationInfo.isSuccess()) {
-                taskService.markTaskExecutedSuccess(task.getBizCode(), task.getBizId(), task.getId());
-            } else {
-                taskService.markTaskExecutedFailure(task.getBizCode(), task.getBizId(),
-                        task.getId(), nextRetryTime, errorMsg);
-            }
-            //记录任务执行日志
-            taskService.saveTaskLog(taskLog);
-        } catch (Throwable e) {
-            //回滚事务
-            connection.rollback();
-            throw new TaskExecutionException(e);
+        //业务回调
+        TaskHandler taskHandler = (TaskHandler) context.getAttribute(TaskExecutionContext.TASK_HANDLER);
+        if (taskHandler != null) {
+            taskHandler.handleInTransactionAfterRun(context);
         }
-        //提交事务
-        connection.commit();
+
+        //解锁监控数据
+        if (invocationInfo.isSuccess()) {
+            taskService.markTaskExecutedSuccess(task.getBizCode(), task.getBizId(), task.getId());
+        } else {
+            taskService.markTaskExecutedFailure(task.getBizCode(), task.getBizId(),
+                    task.getId(), nextRetryTime, errorMsg);
+        }
+        //记录任务执行日志
+        taskService.saveTaskLog(taskLog);
     }
 }

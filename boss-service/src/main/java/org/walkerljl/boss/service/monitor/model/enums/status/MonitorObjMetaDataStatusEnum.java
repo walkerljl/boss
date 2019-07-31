@@ -20,9 +20,9 @@ public enum MonitorObjMetaDataStatusEnum implements BaseMonitorStatusIEnum {
     DELETED("20", "已删除"),
 
     /**
-     * 暂定预警
+     * 暂停预警
      */
-    PAUSE_ALARM("30", "暂定预警"),;
+    PAUSE_ALARM("30", "暂停预警"),;
 
     /**
      * 构造函数

@@ -38,19 +38,21 @@ public class MonitorMachine extends AbstractMachine implements Machine {
     }
 
     @Override
-    public void start() throws CannotStartMachineException {
+    public Machine start() throws CannotStartMachineException {
         monitorTaskMessageFetcher.start();
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Monitor machine has started.");
         }
+        return this;
     }
 
     @Override
-    public void stop() throws CannotStopMachineException {
+    public Machine stop() throws CannotStopMachineException {
         monitorTaskMessageFetcher.stop();
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Monitor machine has stopped.");
         }
+        return this;
     }
 
     @Override

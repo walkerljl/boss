@@ -17,5 +17,9 @@
             <artifactId>boss-support-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.walkerljl</groupId>
+            <artifactId>toolkit-db-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

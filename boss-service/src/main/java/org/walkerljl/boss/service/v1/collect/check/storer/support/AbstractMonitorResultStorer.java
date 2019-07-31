@@ -11,9 +11,11 @@ import org.walkerljl.boss.dao.dataobject.monitor.v1.MonitorResultDO;
 import org.walkerljl.boss.service.v1.collect.check.storer.MonitorResultStorer;
 import org.walkerljl.toolkit.logging.Logger;
 import org.walkerljl.toolkit.logging.LoggerFactory;
+import org.walkerljl.toolkit.standard.machine.Machine;
 import org.walkerljl.toolkit.standard.machine.abstracts.AbstractMachine;
 import org.walkerljl.toolkit.standard.machine.exception.CannotStartMachineException;
 import org.walkerljl.toolkit.standard.machine.exception.CannotStopMachineException;
+import org.walkerljl.toolkit.standard.machine.exception.MachineException;
 
 /**
  * AbstractMonitorResultStorer
@@ -32,7 +34,7 @@ public class AbstractMonitorResultStorer extends AbstractMachine implements Moni
     private MonitorResultDAO               monitorResultDAO;
 
     @Override
-    public void run() {
+    public Machine run() throws MachineException {
         while (queue.size() > 0 || running) {
             MonitorResultDO bufferElement = null;
             try {
@@ -52,6 +54,7 @@ public class AbstractMonitorResultStorer extends AbstractMachine implements Moni
                 //                        new Object[]{alarmInfo}, e);
             }
         }
+        return this;
     }
 
     @Override
@@ -65,7 +68,7 @@ public class AbstractMonitorResultStorer extends AbstractMachine implements Moni
     }
 
     @Override
-    public void start() {
+    public Machine start() {
         synchronized (this) {
             if (!running) {
                 initWorker();
@@ -76,10 +79,11 @@ public class AbstractMonitorResultStorer extends AbstractMachine implements Moni
                 }
             }
         }
+        return this;
     }
 
     @Override
-    public void stop() {
+    public Machine stop() {
         synchronized (this) {
             running = false;
             if (LOGGER.isDebugEnabled()) {
@@ -87,6 +91,7 @@ public class AbstractMonitorResultStorer extends AbstractMachine implements Moni
             }
 
         }
+        return this;
     }
 
     /**

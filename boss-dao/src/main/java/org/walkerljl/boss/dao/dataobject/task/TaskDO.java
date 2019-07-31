@@ -25,11 +25,11 @@ public class TaskDO extends BaseTaskDO {
     private Integer attempts;
     /** 最大重试次数*/
     private Integer maxAttempts;
-    /** 执行规则*/
+    /** 重试规则*/
     private String  retryRule;
-    /** 上次执行时间*/
+    /** 上次重试时间*/
     private Date    lastRetryTime;
-    /** 下次执行时间*/
+    /** 下次重试时间*/
     private Date    nextRetryTime;
 
     /**

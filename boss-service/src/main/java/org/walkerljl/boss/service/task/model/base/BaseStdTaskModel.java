@@ -1,6 +1,6 @@
 package org.walkerljl.boss.service.task.model.base;
 
-import org.walkerljl.boss.model.base.BaseStdCoreModel;
+import org.walkerljl.boss.common.model.core.BaseStdCoreModel;
 
 /**
  * 标准的基础任务模型

@@ -9,6 +9,7 @@ import org.walkerljl.boss.service.retry.impl.RetryContext;
 import org.walkerljl.boss.service.task.model.Task;
 import org.walkerljl.boss.service.task.model.TaskParam;
 import org.walkerljl.boss.support.common.util.JSONUtil;
+import org.walkerljl.toolkit.standard.resource.Resource;
 import org.walkerljl.toolkit.standard.resource.exception.CannotDestroyResourceException;
 import org.walkerljl.toolkit.standard.resource.exception.CannotInitResourceException;
 import org.walkerljl.toolkit.template.log.Logger;
@@ -43,13 +44,13 @@ public class SyncUserInfoRetryHandler implements RetryHandler {
     }
 
     @Override
-    public void init() throws CannotInitResourceException {
-
+    public Resource init() throws CannotInitResourceException {
+        return this;
     }
 
     @Override
-    public void destroy() throws CannotDestroyResourceException {
-
+    public Resource destroy() throws CannotDestroyResourceException {
+        return this;
     }
 
     @Override

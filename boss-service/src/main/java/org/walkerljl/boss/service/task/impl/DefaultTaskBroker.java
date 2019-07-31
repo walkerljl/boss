@@ -4,9 +4,12 @@ import org.walkerljl.boss.common.util.CollectionUtil;
 import org.walkerljl.boss.dao.daointerface.task.TaskDAO;
 import org.walkerljl.boss.dao.daointerface.task.TaskParamDAO;
 import org.walkerljl.boss.dao.dataobject.task.TaskDO;
+import org.walkerljl.boss.dao.dataobject.task.TaskParamDO;
+import org.walkerljl.boss.service.converter.ModelConverter;
 import org.walkerljl.boss.service.task.TaskBroker;
 import org.walkerljl.boss.service.task.impl.abstracts.AbstractTaskBroker;
-import org.walkerljl.boss.service.task.impl.util.ModelConverter;
+import org.walkerljl.boss.service.task.impl.converter.TaskDOConverter;
+import org.walkerljl.boss.service.task.impl.converter.TaskParamDOConverter;
 import org.walkerljl.boss.service.task.model.Task;
 import org.walkerljl.boss.service.task.model.TaskParam;
 import org.walkerljl.boss.service.task.model.enums.status.TaskStatusEnum;
@@ -18,8 +21,10 @@ import org.walkerljl.boss.service.task.model.enums.status.TaskStatusEnum;
  */
 public class DefaultTaskBroker extends AbstractTaskBroker implements TaskBroker {
 
-    private TaskDAO      taskDAO;
-    private TaskParamDAO taskParamDAO;
+    private ModelConverter<Task, TaskDO>           taskDOConverter      = new TaskDOConverter();
+    private ModelConverter<TaskParam, TaskParamDO> taskParamDOConverter = new TaskParamDOConverter();
+    private TaskDAO                                taskDAO;
+    private TaskParamDAO                           taskParamDAO;
 
     public DefaultTaskBroker(TaskDAO taskDAO, TaskParamDAO taskParamDAO) {
         this.taskDAO = taskDAO;
@@ -34,7 +39,7 @@ public class DefaultTaskBroker extends AbstractTaskBroker implements TaskBroker 
          * 3、更新任务状态为业务需求状态
          * 备注：不需要事务，无锁处理。
          */
-        TaskDO taskDO = ModelConverter.toTaskDO(task);
+        TaskDO taskDO = taskDOConverter.toB(task);
         if (taskDO == null) {
             return null;
         }
@@ -56,7 +61,7 @@ public class DefaultTaskBroker extends AbstractTaskBroker implements TaskBroker 
             taskParam.setBizCode(task.getBizCode());
             taskParam.setBizId(task.getBizId());
             taskParam.setTaskId(taskId);
-            taskParamDAO.save(ModelConverter.toTaskParamDO(taskParam));
+            taskParamDAO.save(taskParamDOConverter.toB(taskParam));
         }
 
         //恢复任务状态

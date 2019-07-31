@@ -1,12 +1,10 @@
 package org.walkerljl.boss.service.task.shell.dispatch.impl;
 
-import javax.sql.DataSource;
-
 import org.walkerljl.boss.service.task.TaskService;
-import org.walkerljl.boss.service.task.impl.TaskLoggerNames;
 import org.walkerljl.boss.service.task.impl.RunnableTask;
 import org.walkerljl.boss.service.task.impl.TaskExecutionConfig;
 import org.walkerljl.boss.service.task.impl.TaskExecutionContext;
+import org.walkerljl.boss.service.task.impl.TaskLoggerNames;
 import org.walkerljl.boss.service.task.impl.executor.TaskExecutor;
 import org.walkerljl.boss.service.task.impl.executor.TaskExecutorConfig;
 import org.walkerljl.boss.service.task.impl.executor.TaskExecutorRepository;
@@ -33,12 +31,10 @@ public class DefaultTaskDispatchExecutor implements TaskDispatchExecutor {
 
     private TaskService         taskService;
     private TaskExecutionConfig executionConfig;
-    private DataSource dataSource;
 
-    public DefaultTaskDispatchExecutor(TaskService taskService, TaskExecutionConfig executionConfig, DataSource dataSource) {
+    public DefaultTaskDispatchExecutor(TaskService taskService, TaskExecutionConfig executionConfig) {
         this.taskService = taskService;
         this.executionConfig = executionConfig;
-        this.dataSource = dataSource;
     }
 
     @Override
@@ -67,7 +63,7 @@ public class DefaultTaskDispatchExecutor implements TaskDispatchExecutor {
             TaskExecutionContext context = TaskUtil.buildExecutionContext(executionConfig, splitedTaskItem);
 
             //构建可执行的任务
-            RunnableTask runnableTask = new DefaultRunnableTask(context, taskService, dataSource);
+            RunnableTask runnableTask = new DefaultRunnableTask(context, taskService);
 
             //任务执行
             executor.execute(runnableTask);

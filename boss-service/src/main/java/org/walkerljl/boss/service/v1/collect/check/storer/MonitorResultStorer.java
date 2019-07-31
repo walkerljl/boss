@@ -8,7 +8,7 @@ import org.walkerljl.toolkit.standard.machine.Machine;
  *
  * @author lijunlin
  */
-public interface MonitorResultStorer extends Machine, Runnable {
+public interface MonitorResultStorer extends Machine {
 
     void store(MonitorResultDO monitorResult);
 }

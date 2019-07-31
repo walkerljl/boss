@@ -1,7 +1,3 @@
-/**
- * Alipay.com Inc.
- * Copyright (c) 2004-2017 All Rights Reserved.
- */
 package org.walkerljl.boss.support.common.attribute.impl;
 
 import java.io.Serializable;

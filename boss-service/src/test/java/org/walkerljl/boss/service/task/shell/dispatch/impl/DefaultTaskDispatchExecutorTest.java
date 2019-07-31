@@ -3,7 +3,6 @@ package org.walkerljl.boss.service.task.shell.dispatch.impl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.walkerljl.boss.service.task.BaseTaskUnitTest;
-import org.walkerljl.boss.service.task.DummyDataSource;
 import org.walkerljl.boss.service.task.TaskService;
 import org.walkerljl.boss.service.task.impl.DefaultTaskService;
 import org.walkerljl.boss.service.task.impl.TaskExecutionConfig;
@@ -24,15 +23,15 @@ public class DefaultTaskDispatchExecutorTest extends BaseTaskUnitTest {
         TaskService taskService = new DefaultTaskService();
         TaskExecutionConfig executionConfig = new TaskExecutionConfig();
         String taskId = null;
-        TaskDispatchExecutor dispatchExecutor = new DefaultTaskDispatchExecutor(taskService, executionConfig, new DummyDataSource());
+        TaskDispatchExecutor dispatchExecutor = new DefaultTaskDispatchExecutor(taskService, executionConfig);
         dispatchExecutor.execute(taskId);
 
         taskId = String.valueOf(new DefaultSplitedTaskItem("bizCode","bizId","taskId", TaskStatusEnum.UNPROCESS.getCode()));
-        dispatchExecutor = new DefaultTaskDispatchExecutor(taskService, executionConfig, new DummyDataSource());
+        dispatchExecutor = new DefaultTaskDispatchExecutor(taskService, executionConfig);
         dispatchExecutor.execute(taskId);
 
         executionConfig = null;
-        dispatchExecutor = new DefaultTaskDispatchExecutor(taskService, executionConfig, new DummyDataSource());
+        dispatchExecutor = new DefaultTaskDispatchExecutor(taskService, executionConfig);
         boolean flag = false;
         try {
             dispatchExecutor.execute(taskId);

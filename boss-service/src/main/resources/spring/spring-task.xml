@@ -39,7 +39,6 @@
     <bean id="defaultTaskDispatchExecutor" class="org.walkerljl.boss.service.task.shell.dispatch.impl.DefaultTaskDispatchExecutor">
         <constructor-arg ref="defaultTaskService"/>
         <constructor-arg ref="taskExecutionConfig"/>
-        <constructor-arg ref="routingDataSource"/>
     </bean>
 
     <!-- 任务引导程序-->

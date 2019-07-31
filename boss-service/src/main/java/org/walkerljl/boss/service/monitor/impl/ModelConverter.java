@@ -14,12 +14,7 @@ import org.walkerljl.boss.service.monitor.model.alarm.AlarmRecord;
 import org.walkerljl.boss.service.monitor.model.alarm.AlarmRule;
 import org.walkerljl.boss.service.monitor.model.alarm.enums.AlarmChannelEnum;
 import org.walkerljl.boss.service.monitor.model.alarm.enums.AlarmLevelEnum;
-import org.walkerljl.boss.service.monitor.model.alarm.enums.status.AlarmRecordStatusEnum;
-import org.walkerljl.boss.service.monitor.model.alarm.enums.status.AlarmRuleStatusEnum;
 import org.walkerljl.boss.service.monitor.model.alarm.enums.AlarmRuleTypeEnum;
-import org.walkerljl.boss.service.monitor.model.base.BaseMonitorModel;
-import org.walkerljl.boss.service.monitor.model.enums.status.MonitorDataStatusEnum;
-import org.walkerljl.boss.service.monitor.model.enums.status.MonitorObjMetaDataStatusEnum;
 
 /**
  * 核心模型与数据访问模型转换器
@@ -40,7 +35,7 @@ public class ModelConverter {
         }
 
         AlarmRecordDO resultModel = new AlarmRecordDO();
-        inputModel.initBaseDOInfo(resultModel);
+        //inputModel.initBaseDOInfo(resultModel);
         resultModel.setBizCode(inputModel.getBizCode());
         resultModel.setBizName(inputModel.getBizName());
         resultModel.setObjId(inputModel.getObjId());
@@ -50,8 +45,8 @@ public class ModelConverter {
         resultModel.setLevel(inputModel.getLevel() == null ? null : inputModel.getLevel().getCode());
         resultModel.setContent(inputModel.getContent());
         resultModel.setTime(inputModel.getTime());
-        resultModel.setChannels(inputModel.toJSONString(inputModel.getChannels()));
-        resultModel.setReceivers(inputModel.toJSONString(inputModel.getReceivers()));
+        //resultModel.setChannels(inputModel.toJSONString(inputModel.getChannels()));
+        //resultModel.setReceivers(inputModel.toJSONString(inputModel.getReceivers()));
 
         return resultModel;
     }
@@ -68,7 +63,7 @@ public class ModelConverter {
         }
 
         AlarmRecord resultModel = new AlarmRecord();
-        resultModel.initBaseInfo(inputModel, AlarmRecordStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
+        //resultModel.initBaseInfo(inputModel, AlarmRecordStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
         resultModel.setBizCode(inputModel.getBizCode());
         resultModel.setBizName(inputModel.getBizName());
         resultModel.setObjId(inputModel.getObjId());
@@ -95,12 +90,12 @@ public class ModelConverter {
             return null;
         }
         MonitorObjMetaData resultModel = new MonitorObjMetaData();
-        resultModel.initBaseInfo(inputModel, MonitorObjMetaDataStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
+        //resultModel.initBaseInfo(inputModel, MonitorObjMetaDataStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
         resultModel.setBizCode(inputModel.getBizCode());
         resultModel.setBizName(inputModel.getBizName());
         resultModel.setObjId(inputModel.getObjId());
         resultModel.setObjName(inputModel.getObjName());
-        resultModel.setAlarmReceivers(BaseMonitorModel.parseList(inputModel.getAlarmReceivers(), String.class));
+        //resultModel.setAlarmReceivers(BaseMonitorModel.parseList(inputModel.getAlarmReceivers(), String.class));
         resultModel.setBizOwner(inputModel.getBizOwner());
 
         return resultModel;
@@ -117,13 +112,13 @@ public class ModelConverter {
             return null;
         }
         AlarmRule resultModel = new AlarmRule();
-        resultModel.initBaseInfo(inputModel, AlarmRuleStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
+        //resultModel.initBaseInfo(inputModel, AlarmRuleStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
         resultModel.setBizCode(inputModel.getBizCode());
         resultModel.setObjId(inputModel.getObjId());
         resultModel.setType((AlarmRuleTypeEnum) AlarmRuleTypeEnum.values()[0].getEnumObject(inputModel.getType()));
         resultModel.setExpression(inputModel.getExpression());
 
-        List<String> channelCodes = BaseMonitorModel.parseList(inputModel.getChannels(), String.class);
+        List<String> channelCodes = null;//BaseMonitorModel.parseList(inputModel.getChannels(), String.class);
         if (CollectionUtil.isEmpty(channelCodes)) {
             return resultModel;
         }
@@ -173,7 +168,7 @@ public class ModelConverter {
             return null;
         }
         MonitorData resultModel = new MonitorData();
-        resultModel.initBaseInfo(inputModel, MonitorDataStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
+        //resultModel.initBaseInfo(inputModel, MonitorDataStatusEnum.values()[0].getEnumObject(inputModel.getStatus()));
         resultModel.setBizCode(inputModel.getBizCode());
         resultModel.setObjId(inputModel.getObjId());
         resultModel.setValue(inputModel.getValue());

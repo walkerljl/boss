@@ -1,6 +1,6 @@
 package org.walkerljl.boss.service.monitor.model.base;
 
-import org.walkerljl.boss.model.base.BaseCoreModel;
+import org.walkerljl.boss.common.model.core.BaseCoreModel;
 
 /**
  * 基础模型

@@ -36,14 +36,16 @@ public class ServiceBootstrap extends AbstractMachine implements Machine {
 
     @PostConstruct
     @Override
-    public void start() throws CannotStartMachineException {
+    public Machine start() throws CannotStartMachineException {
         monitorMachine.start();
+        return this;
     }
 
     @PreDestroy
     @Override
-    public void stop() throws CannotStopMachineException {
+    public Machine stop() throws CannotStopMachineException {
         monitorMachine.stop();
+        return this;
     }
 
     @Override

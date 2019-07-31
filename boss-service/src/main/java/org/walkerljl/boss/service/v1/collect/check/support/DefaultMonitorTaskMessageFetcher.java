@@ -15,6 +15,7 @@ import org.walkerljl.toolkit.lang.MapUtils;
 import org.walkerljl.toolkit.lang.thread.NamedThreadFactory;
 import org.walkerljl.toolkit.logging.Logger;
 import org.walkerljl.toolkit.logging.LoggerFactory;
+import org.walkerljl.toolkit.standard.machine.Machine;
 import org.walkerljl.toolkit.standard.machine.abstracts.AbstractMachine;
 import org.walkerljl.toolkit.standard.machine.exception.CannotStartMachineException;
 import org.walkerljl.toolkit.standard.machine.exception.CannotStopMachineException;
@@ -51,7 +52,7 @@ public class DefaultMonitorTaskMessageFetcher extends AbstractMachine implements
     }
 
     @Override
-    public void start() throws CannotStartMachineException {
+    public Machine start() throws CannotStartMachineException {
         CheckerRepository.bind(MonitorObjectType.HTTP, httpChecker);
         CheckerRepository.bind(MonitorObjectType.DNS_SWITCHABLE_HTTP, dnsSwitchableHttpChecker);
 
@@ -60,7 +61,7 @@ public class DefaultMonitorTaskMessageFetcher extends AbstractMachine implements
             if (LOGGER.isInfoEnabled()) {
                 LOGGER.info(String.format("%s has started,no monitor task message fetch fetcher has been started.", OBJECT_NAME));
             }
-            return;
+            return this;
         }
         for (Checker checker : checkerMap.values()) {
             NamedThreadFactory namedThreadFactory = new NamedThreadFactory(checker.getClass().getSimpleName());
@@ -92,13 +93,15 @@ public class DefaultMonitorTaskMessageFetcher extends AbstractMachine implements
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info(String.format("%s has started.", OBJECT_NAME));
         }
+        return this;
     }
 
     @Override
-    public void stop() throws CannotStopMachineException {
+    public Machine stop() throws CannotStopMachineException {
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info(String.format("%s has stopped.", OBJECT_NAME));
         }
+        return this;
     }
 
     @Override

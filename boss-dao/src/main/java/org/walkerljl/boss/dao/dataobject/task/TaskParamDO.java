@@ -12,11 +12,11 @@ public class TaskParamDO extends BaseTaskDO {
     private static final long serialVersionUID = -8640391014168493273L;
 
     /** 业务编码*/
-    private String  bizCode;
+    private String bizCode;
     /** 业务ID*/
-    private String  bizId;
+    private String bizId;
     /** 任务ID*/
-    private String  taskId;
+    private String taskId;
     /**  参数值*/
     private String value;
 

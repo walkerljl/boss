@@ -6,9 +6,15 @@ import java.util.List;
 import org.walkerljl.boss.dao.daointerface.task.TaskDAO;
 import org.walkerljl.boss.dao.daointerface.task.TaskLogDAO;
 import org.walkerljl.boss.dao.daointerface.task.TaskParamDAO;
+import org.walkerljl.boss.dao.dataobject.task.TaskDO;
+import org.walkerljl.boss.dao.dataobject.task.TaskLogDO;
+import org.walkerljl.boss.dao.dataobject.task.TaskParamDO;
+import org.walkerljl.boss.service.converter.ModelConverter;
 import org.walkerljl.boss.service.task.TaskService;
 import org.walkerljl.boss.service.task.exception.TaskSalException;
-import org.walkerljl.boss.service.task.impl.util.ModelConverter;
+import org.walkerljl.boss.service.task.impl.converter.TaskDOConverter;
+import org.walkerljl.boss.service.task.impl.converter.TaskLogDOConverter;
+import org.walkerljl.boss.service.task.impl.converter.TaskParamDOConverter;
 import org.walkerljl.boss.service.task.model.Task;
 import org.walkerljl.boss.service.task.model.TaskLog;
 import org.walkerljl.boss.service.task.model.TaskParam;
@@ -28,6 +34,10 @@ public class DefaultTaskService implements TaskService {
     private static final Logger DIGEST_LOGGER = LoggerFactory.getLogger(TaskLoggerNames.SAL_DIGEST);
     private static final Logger DETAIL_LOGGER = LoggerFactory.getLogger(TaskLoggerNames.SAL_DETAIL);
 
+    private ModelConverter<Task, TaskDO>           taskDOConverter      = new TaskDOConverter();
+    private ModelConverter<TaskParam, TaskParamDO> taskParamDOConverter = new TaskParamDOConverter();
+    private ModelConverter<TaskLog, TaskLogDO>     taskLogDOConverter   = new TaskLogDOConverter();
+
     private TaskDAO      taskDAO;
     private TaskParamDAO taskParamDAO;
     private TaskLogDAO   taskLogDAO;
@@ -38,7 +48,7 @@ public class DefaultTaskService implements TaskService {
                 new InvocationInfo<>(getClass(), "saveTaskLog", taskLog);
 
         try {
-            taskLogDAO.save(ModelConverter.toTaskLogDO(taskLog));
+            taskLogDAO.save(taskLogDOConverter.toB(taskLog));
         } catch (Throwable e) {
             invocationInfo.markFailure(e);
             throw new TaskSalException(e);
@@ -106,7 +116,7 @@ public class DefaultTaskService implements TaskService {
                 new InvocationInfo<>(getClass(), "getTask", new Object[] {bizCode, bizId, taskId});
 
         try {
-            Task resultData = ModelConverter.toTask(taskDAO.get(bizCode, bizId, Long.parseLong(taskId)));
+            Task resultData = taskDOConverter.toA(taskDAO.get(bizCode, bizId, Long.parseLong(taskId)));
             invocationInfo.markSuccess(resultData);
             return resultData;
         } catch (Throwable e) {
@@ -124,7 +134,7 @@ public class DefaultTaskService implements TaskService {
                 new InvocationInfo<>(getClass(), "listTaskParams", new Object[] {bizCode, bizId, taskId});
 
         try {
-            List<TaskParam> resultDataList = ModelConverter.toTaskParams(taskParamDAO.list(bizCode, bizId, Long.parseLong(taskId)));
+            List<TaskParam> resultDataList = taskParamDOConverter.toAList(taskParamDAO.list(bizCode, bizId, Long.parseLong(taskId)));
             invocationInfo.markSuccess(resultDataList);
             return resultDataList;
         } catch (Throwable e) {
@@ -142,7 +152,7 @@ public class DefaultTaskService implements TaskService {
                 new InvocationInfo<>(getClass(), "listUnprocessTasks", new Object[] {loadInterval, currentPage, pageSize});
 
         try {
-            List<Task> resultDataList = ModelConverter.toTasks(
+            List<Task> resultDataList = taskDOConverter.toAList(
                     taskDAO.listUnprocessTasks(loadInterval, currentPage, pageSize));
             invocationInfo.markSuccess(resultDataList);
             return resultDataList;
@@ -161,7 +171,7 @@ public class DefaultTaskService implements TaskService {
                 new InvocationInfo<>(getClass(), "listFailureTasks", new Object[] {loadInterval, currentPage, pageSize});
 
         try {
-            List<Task> resultDataList = ModelConverter.toTasks(
+            List<Task> resultDataList = taskDOConverter.toAList(
                     taskDAO.listFailureTasks(loadInterval, currentPage, pageSize));
             invocationInfo.markSuccess(resultDataList);
             return resultDataList;
@@ -180,7 +190,7 @@ public class DefaultTaskService implements TaskService {
                 new InvocationInfo<>(getClass(), "listTimeoutTasks", new Object[] {loadInterval, retryTimeout, currentPage, pageSize});
 
         try {
-            List<Task> resultDataList = ModelConverter.toTasks(taskDAO.listTimeoutTasks(loadInterval, retryTimeout,
+            List<Task> resultDataList = taskDOConverter.toAList(taskDAO.listTimeoutTasks(loadInterval, retryTimeout,
                     currentPage, pageSize));
             invocationInfo.markSuccess(resultDataList);
             return resultDataList;

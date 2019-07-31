@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.walkerljl.boss.service.task.BaseTaskUnitTest;
-import org.walkerljl.boss.service.task.DummyDataSource;
 import org.walkerljl.boss.service.task.TaskService;
 import org.walkerljl.boss.service.task.exception.TaskException;
 import org.walkerljl.boss.service.task.impl.RunnableTask;
@@ -78,7 +77,7 @@ public class DefaultRunnableTaskTest extends BaseTaskUnitTest {
             }
         };
 
-        RunnableTask runnableTask = new DefaultRunnableTask(context, taskService, new DummyDataSource());
+        RunnableTask runnableTask = new DefaultRunnableTask(context, taskService);
         runnableTask.run();
     }
 
@@ -142,7 +141,7 @@ public class DefaultRunnableTaskTest extends BaseTaskUnitTest {
             }
         };
 
-        RunnableTask runnableTask = new DefaultRunnableTask(context, taskService, new DummyDataSource());
+        RunnableTask runnableTask = new DefaultRunnableTask(context, taskService);
         runnableTask.run();
     }
 }

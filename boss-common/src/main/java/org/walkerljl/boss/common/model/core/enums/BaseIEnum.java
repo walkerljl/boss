@@ -1,9 +1,9 @@
-package org.walkerljl.boss.model.enums.base;
+package org.walkerljl.boss.common.model.core.enums;
 
 import org.walkerljl.toolkit.standard.enums.IEnum;
 
 /**
- * 基础枚举
+ * BaseIEnum
  *
  * @author xingxun
  */

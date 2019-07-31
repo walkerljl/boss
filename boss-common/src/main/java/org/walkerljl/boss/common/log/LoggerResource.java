@@ -19,14 +19,15 @@ public class LoggerResource implements Resource {
     }
 
     @Override
-    public void init() throws CannotInitResourceException {
+    public Resource init() throws CannotInitResourceException {
         //绑定日志实现
         LoggerFactory.bindLoggerRepository(new DefaultLoggerRepository());
+        return this;
     }
 
     @Override
-    public void destroy() throws CannotDestroyResourceException {
-
+    public Resource destroy() throws CannotDestroyResourceException {
+        return this;
     }
 
     @Override

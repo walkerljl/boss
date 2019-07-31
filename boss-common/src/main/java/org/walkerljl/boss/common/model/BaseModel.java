@@ -1,6 +1,7 @@
-package org.walkerljl.boss.model.base;
+package org.walkerljl.boss.common.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,25 +9,26 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-import org.walkerljl.boss.support.common.util.StringUtil;
+import org.walkerljl.boss.common.util.CollectionUtil;
+import org.walkerljl.boss.common.util.StringUtil;
 
 /**
- * 基础核心模型
+ * 基础模型
  *
  * @author xingxun
  */
-public class BaseCoreModel implements Serializable {
+public class BaseModel implements Serializable {
 
-    private static final long serialVersionUID = -3631715832151460408L;
+    private static final long serialVersionUID = -2178195448223718688L;
 
     /**
      * fastjson 统一配置
      */
     private static final SerializerFeature[] FASTJSON_CONFIG = new SerializerFeature[] {
-            //SerializerFeature.DisableCircularReferenceDetect,
+            SerializerFeature.DisableCircularReferenceDetect,
             SerializerFeature.WriteDateUseDateFormat,
-            SerializerFeature.WriteMapNullValue,
-            SerializerFeature.WriteNullStringAsEmpty
+            //SerializerFeature.WriteMapNullValue,
+            //SerializerFeature.WriteNullStringAsEmpty
             //,SerializerFeature.PrettyFormat
     };
 
@@ -37,6 +39,9 @@ public class BaseCoreModel implements Serializable {
      * @return
      */
     public static String toJSONString(Object object) {
+        if (object == null) {
+            return null;
+        }
         return JSON.toJSONString(object, FASTJSON_CONFIG);
     }
 
@@ -53,6 +58,13 @@ public class BaseCoreModel implements Serializable {
         return JSON.parseObject(text);
     }
 
+    public static <T> T parseObject(String text, Class<T> clazz) {
+        if (StringUtil.isEmpty(text)) {
+            return null;
+        }
+        return JSON.parseObject(text, clazz);
+    }
+
     /**
      * 解析成List对象
      *
@@ -61,10 +73,28 @@ public class BaseCoreModel implements Serializable {
      * @return
      */
     public static <T> List<T> parseList(String text, Class<T> clazz) {
-        if (text == null || "".equalsIgnoreCase(text.trim())) {
+        if (StringUtil.isEmpty(text)) {
             return null;
         }
         return JSONObject.parseArray(text, clazz);
+    }
+
+    public static <K, V> List<Map<K, V>> parseListMap(String json) {
+        if (StringUtil.isEmpty(json)) {
+            return null;
+        }
+
+        List<String> items = parseList(json, String.class);
+        if (CollectionUtil.isEmpty(items)) {
+            return null;
+        }
+
+        List<Map<K, V>> listMap = new ArrayList<>(items.size());
+        for (String item : items) {
+            Map<K, V> itemMap = parseMap(item);
+            listMap.add(itemMap);
+        }
+        return listMap;
     }
 
     /**
@@ -73,8 +103,8 @@ public class BaseCoreModel implements Serializable {
      * @param text JSON字符串
      * @return
      */
-    public static Map<String, String> parseMap(String text) {
-        if (text == null) {
+    public static <K, V> Map<K, V> parseMap(String text) {
+        if (StringUtil.isEmpty(text)) {
             return null;
         }
 

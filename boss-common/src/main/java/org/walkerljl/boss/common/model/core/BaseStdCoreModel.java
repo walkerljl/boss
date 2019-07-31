@@ -1,74 +1,75 @@
-package org.walkerljl.boss.model.base;
+package org.walkerljl.boss.common.model.core;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
-import org.walkerljl.boss.dao.dataobject.base.StdBaseDO;
-import org.walkerljl.boss.model.enums.base.StatusIEnum;
+import org.walkerljl.boss.common.util.CollectionUtil;
+import org.walkerljl.boss.common.model.core.enums.StatusIEnum;
 
 /**
- * 基础核心模型
  *
  * @author xingxun
  */
 public class BaseStdCoreModel extends BaseCoreModel {
 
-    private static final long serialVersionUID = -3631715832151460408L;
+    private static final long serialVersionUID = -161238553521541558L;
 
     /** ID*/
     private String              id;
-    /** 状态*/
-    private StatusIEnum         status;
-    /** 备注*/
+    /** UUID（可选）*/
+    private String              uuid;
+    /** 备注（可选，不超过512个字符）*/
     private String              remark;
-    /** 扩展信息*/
+    /** 扩展信息（可选，不超过2048个字符）**/
     private Map<String, String> extInfo;
-    /** 创建者*/
+    /** 状态（必选，不超过2个字符）**/
+    private StatusIEnum         status;
+    /** 创建者（必选，不超过64个字符）**/
     private String              creator;
-    /** 创建时间*/
+    /** 创建时间（必选，不超过512个字符）**/
     private Date                createdTime;
-    /** 最近修改者*/
+    /** 最近修改者（必选，不超过64个字符）**/
     private String              modifier;
-    /** 最近更新时间*/
+    /** 最近更新时间（必选）**/
     private Date                modifiedTime;
 
-    /**
-     * 初始化基础信息
-     *
-     * @param destModel 目标模型
-     */
-    public void initBaseDOInfo(StdBaseDO destModel) {
-        if (destModel == null) {
-            return;
-        }
-        destModel.setId(this.id == null ? 0L : Long.valueOf(this.id));
-        destModel.setRemark(this.remark);
-        destModel.setExtInfo(toJSONString(this.extInfo));
-        destModel.setStatus(this.status == null ? null : this.status.getCode());
-        destModel.setCreator(this.creator);
-        destModel.setCreatedTime(this.createdTime);
-        destModel.setModifier(this.modifier);
-        destModel.setModifiedTime(this.modifiedTime);
+    public <T extends BaseStdCoreModel> T init(String operatorId, StatusIEnum status) {
+        this.setStatus(status);
+        this.setCreator(operatorId);
+        this.setCreatedTime(new Date());
+        this.setModifier(this.getCreator());
+        this.setModifiedTime(this.getCreatedTime());
+        return (T) this;
     }
 
-    /**
-     * 初始化基础信息
-     *
-     * @param baseDO 基础数据模型
-     * @param status 状态对象
-     */
-    public void initBaseInfo(StdBaseDO baseDO, StatusIEnum status) {
-        if (baseDO == null) {
-            return;
+    public static <T extends BaseStdCoreModel> List<String> extractIds(List<T> models) {
+        if (CollectionUtil.isEmpty(models)) {
+            return null;
         }
-        this.setId(String.valueOf(baseDO.getId()));
-        this.setRemark(baseDO.getRemark());
-        this.setExtInfo((Map)parseObject(baseDO.getExtInfo()));
+
+        List<String> ids = new ArrayList<>(models.size());
+        for (T model : models) {
+            if (model == null) {
+                continue;
+            }
+            ids.add(model.getId());
+        }
+        return ids;
+    }
+
+    public <T extends BaseStdCoreModel> T initOpConditionWithId(String id) {
+        this.setId(id);
+        return (T) this;
+    }
+
+    public  <T extends BaseStdCoreModel> T initStatusOpCondition(String id, String operatorId, StatusIEnum status) {
+        this.setId(id);
+        this.setModifier(operatorId);
+        this.setModifiedTime(new Date());
         this.setStatus(status);
-        this.setCreator(baseDO.getCreator());
-        this.setCreatedTime(baseDO.getCreatedTime());
-        this.setModifier(baseDO.getModifier());
-        this.setModifiedTime(baseDO.getModifiedTime());
+        return (T) this;
     }
 
     /**
@@ -90,21 +91,21 @@ public class BaseStdCoreModel extends BaseCoreModel {
     }
 
     /**
-     * Getter method for property <tt>status</tt>.
+     * Getter method for property <tt>uuid</tt>.
      *
-     * @return property value of status
+     * @return property value of uuid
      */
-    public StatusIEnum getStatus() {
-        return status;
+    public String getUuid() {
+        return uuid;
     }
 
     /**
-     * Setter method for property <tt>status</tt>.
+     * Setter method for property <tt>uuid</tt>.
      *
-     * @param status  value to be assigned to property status
+     * @param uuid  value to be assigned to property uuid
      */
-    public void setStatus(StatusIEnum status) {
-        this.status = status;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -141,6 +142,24 @@ public class BaseStdCoreModel extends BaseCoreModel {
      */
     public void setExtInfo(Map<String, String> extInfo) {
         this.extInfo = extInfo;
+    }
+
+    /**
+     * Getter method for property <tt>status</tt>.
+     *
+     * @return property value of status
+     */
+    public StatusIEnum getStatus() {
+        return status;
+    }
+
+    /**
+     * Setter method for property <tt>status</tt>.
+     *
+     * @param status  value to be assigned to property status
+     */
+    public void setStatus(StatusIEnum status) {
+        this.status = status;
     }
 
     /**
@@ -213,10 +232,5 @@ public class BaseStdCoreModel extends BaseCoreModel {
      */
     public void setModifiedTime(Date modifiedTime) {
         this.modifiedTime = modifiedTime;
-    }
-
-    @Override
-    public String toString() {
-        return toJSONString(this);
     }
 }
